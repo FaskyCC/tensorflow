@@ -5,9 +5,9 @@ import tensorflow as tf
 from tensorflow.python.platform import gfile
 
 # 数据集的路径
-INPUT_DATA = r'/Users/wangqingfa/Desktop/kaggle/train'
+INPUT_DATA = r'F:\VitualBox\Masterfile\kaggle\train'
 # 分割好的数据集
-OUT_FILE = r'/Users/wangqingfa/Desktop/kaggle/flower_processed_data.npy'
+OUT_FILE = r'F:\VitualBox\Masterfile\kaggle\flower_processed_data.npy'
 
 # 测试数据和验证数据所占的比例为10%
 VALIDATION_PERCENTAGE = 10
