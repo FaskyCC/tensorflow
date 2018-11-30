@@ -1,3 +1,2 @@
-import os
-print()
-print(os.getcwd())
+import tensorflow as tf
+
