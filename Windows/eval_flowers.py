@@ -11,16 +11,16 @@ plt.style.use('ggplot')
 slim = tf.contrib.slim
 
 #State your log directory where you can retrieve your model
-log_dir = './log'
+log_dir = r'/Users/Fa/Desktop/Test/'
 
 #Create a new evaluation log directory to visualize the validation process
-log_eval = './log_eval_test'
+log_eval = r'/Users/Fa/Desktop/Test/log_eval_test'
 
 #State the dataset directory where the validation set is found
-dataset_dir = '.'
+dataset_dir = r'/Users/Fa/Desktop/Test/'
 
 #State the batch_size to evaluate each time, which can be a lot more than the training batch
-batch_size = 36
+batch_size = 8
 
 #State the number of epochs to evaluate
 num_epochs = 1
@@ -41,7 +41,7 @@ def run():
         images, raw_images, labels = load_batch(dataset, batch_size = batch_size, is_training = False)
 
         #Create some information about the training steps
-        num_batches_per_epoch = dataset.num_samples / batch_size
+        num_batches_per_epoch = dataset.num_samples // batch_size
         num_steps_per_epoch = num_batches_per_epoch
 
         #Now create the inference model but set is_training=False
