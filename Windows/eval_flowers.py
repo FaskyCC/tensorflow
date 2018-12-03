@@ -6,18 +6,18 @@ from inception_resnet_v2 import inception_resnet_v2, inception_resnet_v2_arg_sco
 import time
 import os
 from train_flowers import get_split, load_batch
-import matplotlib.pyplot as plt
-plt.style.use('ggplot')
+#import matplotlib.pyplot as plt
+#plt.style.use('ggplot')
 slim = tf.contrib.slim
 
 #State your log directory where you can retrieve your model
-log_dir = r'/Users/Fa/Desktop/Test/'
+log_dir = r'C:/Users/Fa/Desktop/Test/'
 
 #Create a new evaluation log directory to visualize the validation process
-log_eval = r'/Users/Fa/Desktop/Test/log_eval_test'
+log_eval = 'C:/Users/Fa/Desktop/Test/log_eval_test'
 
 #State the dataset directory where the validation set is found
-dataset_dir = r'/Users/Fa/Desktop/Test/'
+dataset_dir = r'C:/Users/Fa/Desktop/Test/'
 
 #State the batch_size to evaluate each time, which can be a lot more than the training batch
 batch_size = 8
@@ -78,7 +78,6 @@ def run():
 
             return accuracy_value
 
-
         #Define some scalar quantities to monitor
         tf.summary.scalar('Validation_Accuracy', accuracy)
         my_summary_op = tf.summary.merge_all()
@@ -110,7 +109,8 @@ def run():
             logging.info('Final Streaming Accuracy: %.4f', sess.run(accuracy))
 
             #Now we want to visualize the last batch's images just to see what our model has predicted
-            raw_images, labels, predictions = sess.run([raw_images, labels, predictions])
+        '''  
+         raw_images, labels, predictions = sess.run([raw_images, labels, predictions])
             for i in range(10):
                 image, label, prediction = raw_images[i], labels[i], predictions[i]
                 prediction_name, label_name = dataset.labels_to_name[prediction], dataset.labels_to_name[label]
@@ -124,6 +124,6 @@ def run():
                 plt.show()
 
             logging.info('Model evaluation has completed! Visit TensorBoard for more information regarding your evaluation.')
-
+        '''
 if __name__ == '__main__':
     run()
