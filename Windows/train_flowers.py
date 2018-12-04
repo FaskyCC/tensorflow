@@ -46,7 +46,7 @@ items_to_descriptions = {
 
 #================= TRAINING INFORMATION ==================
 #State the number of epochs to train
-num_epochs = 1
+num_epochs = 20
 
 #State your batch size
 batch_size = 8
@@ -244,7 +244,7 @@ def run():
             time_elapsed = time.time() - start_time
 
             #Run the logging to print some results
-            logging.info('global step %s: loss: %.4f (%.2f sec/step)', global_step_count, total_loss, time_elapsed)
+            logging.info('global step %s/%s: loss: %.4f (%.2f sec/step)', global_step_count, 341*num_epochs, total_loss, time_elapsed)
 
             return total_loss, global_step_count
 
