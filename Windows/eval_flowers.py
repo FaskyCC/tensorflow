@@ -11,13 +11,13 @@ plt.style.use('ggplot')
 slim = tf.contrib.slim
 
 #State your log directory where you can retrieve your model
-log_dir = r'C:/Users/Fa/Desktop/Test/'
+log_dir = r'C:/Users/Fa/Desktop/Test1/'
 
 #Create a new evaluation log directory to visualize the validation process
-log_eval = 'C:/Users/Fa/Desktop/Test/log_eval_test'
+log_eval = 'C:/Users/Fa/Desktop/Test1/log_eval_test'
 
 #State the dataset directory where the validation set is found
-dataset_dir = r'C:/Users/Fa/Desktop/Test/'
+dataset_dir = r'C:/Users/Fa/Desktop/Test1/'
 
 #State the batch_size to evaluate each time, which can be a lot more than the training batch
 batch_size = 16
@@ -111,7 +111,7 @@ def run():
             #Now we want to visualize the last batch's images just to see what our model has predicted
 
             raw_images, labels, predictions = sess.run([raw_images, labels, predictions])
-            for i in range(8):
+            for i in range(16):
                 image, label, prediction = raw_images[i], labels[i], predictions[i]
                 prediction_name, label_name = dataset.labels_to_name[prediction], dataset.labels_to_name[label]
                 text = 'Prediction: %s \n Ground Truth: %s' %(prediction_name, label_name)
