@@ -11,13 +11,13 @@ plt.style.use('ggplot')
 slim = tf.contrib.slim
 
 #State your log directory where you can retrieve your model
-log_dir = r'/Users/wangqingfa/Desktop/small1/'
+log_dir = r'/Users/wangqingfa/Desktop/small/'
 
 #Create a new evaluation log directory to visualize the validation process
-log_eval = r'/Users/wangqingfa/Desktop/small1/log_eval_test'
+log_eval = r'/Users/wangqingfa/Desktop/small/log_eval_test'
 
 #State the dataset directory where the validation set is found
-dataset_dir = r'/Users/wangqingfa/Desktop/small1/'
+dataset_dir = r'/Users/wangqingfa/Desktop/small/'
 
 #State the batch_size to evaluate each time, which can be a lot more than the training batch
 batch_size = 8
@@ -46,7 +46,7 @@ def run():
 
         #Now create the inference model but set is_training=False
         with slim.arg_scope(inception_resnet_v2_arg_scope()):
-            logits, end_points = inception_resnet_v2(images, num_classes = dataset.num_classes, is_training = False)
+            logits, end_points = inception_resnet_v2(images, num_classes = dataset.num_classes, is_training = True)
 
         # #get all the variables to restore from the checkpoint file and create the saver function to restore
         variables_to_restore = slim.get_variables_to_restore()
@@ -56,6 +56,7 @@ def run():
 
         #Just define the metrics to track without the loss or whatsoever
         predictions = tf.argmax(end_points['Predictions'], 1)
+
         accuracy, accuracy_update = tf.contrib.metrics.streaming_accuracy(predictions, labels)
         metrics_op = tf.group(accuracy_update)
 
@@ -111,7 +112,8 @@ def run():
 
             #Now we want to visualize the last batch's images just to see what our model has predicted
             raw_images, labels, predictions = sess.run([raw_images, labels, predictions])
-            for i in range(10):
+
+            for i in range(5):
                 image, label, prediction = raw_images[i], labels[i], predictions[i]
                 prediction_name, label_name = dataset.labels_to_name[prediction], dataset.labels_to_name[label]
                 text = 'Prediction: %s \n Ground Truth: %s' %(prediction_name, label_name)

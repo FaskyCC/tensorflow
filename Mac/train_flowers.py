@@ -9,10 +9,10 @@ slim = tf.contrib.slim
 
 #================ DATASET INFORMATION ======================
 #State dataset directory where the tfrecord files are located
-dataset_dir = r'/Users/wangqingfa/Desktop/small1/'
+dataset_dir = r'/Users/wangqingfa/Desktop/small/'
 
 #State where your log file is at. If it doesn't exist, create it.
-log_dir = r'/Users/wangqingfa/Desktop/small1/'
+log_dir = r'/Users/wangqingfa/Desktop/small/'
 
 #State where your checkpoint file is
 checkpoint_file = '/Users/wangqingfa/Desktop/kaggle/inception_resnet_v2_2016_08_30.ckpt'
@@ -24,7 +24,7 @@ image_size = 299
 num_classes = 5
 
 #State the labels file and read it
-labels_file = '/Users/wangqingfa/Desktop/small1/labels.txt'
+labels_file = '/Users/wangqingfa/Desktop/small/labels.txt'
 labels = open(labels_file, 'r')
 
 #Create a dictionary to refer each label to their string name
