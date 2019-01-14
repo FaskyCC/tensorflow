@@ -9,10 +9,10 @@ slim = tf.contrib.slim
 
 #================ DATASET INFORMATION ======================
 #State dataset directory where the tfrecord files are located
-dataset_dir = r'C:/Users/Fa/Desktop/Test/'
+dataset_dir = r'C:/Users/Fa/Desktop/Test1/'
 
 #State where your log file is at. If it doesn't exist, create it.
-log_dir = r'C:/Users/Fa/Desktop/Test/'
+log_dir = r'C:/Users/Fa/Desktop/Test1/'
 
 #State where your checkpoint file is
 checkpoint_file = 'C:/Users/Fa/Desktop/kaggle/inception_resnet_v2_2016_08_30.ckpt'
@@ -24,7 +24,7 @@ image_size = 299
 num_classes = 5
 
 #State the labels file and read it
-labels_file = 'C:/Users/Fa/Desktop/Test/labels.txt'
+labels_file = 'C:/Users/Fa/Desktop/Test1/labels.txt'
 labels = open(labels_file, 'r')
 
 #Create a dictionary to refer each label to their string name
@@ -46,7 +46,7 @@ items_to_descriptions = {
 
 #================= TRAINING INFORMATION ==================
 #State the number of epochs to train
-num_epochs = 1
+num_epochs = 15
 
 #State your batch size
 batch_size = 8
@@ -244,7 +244,7 @@ def run():
             time_elapsed = time.time() - start_time
 
             #Run the logging to print some results
-            logging.info('global step %s: loss: %.4f (%.2f sec/step)', global_step_count, total_loss, time_elapsed)
+            logging.info('global step %s/%s: loss: %.4f (%.2f sec/step)', global_step_count, 341*num_epochs, total_loss, time_elapsed)
 
             return total_loss, global_step_count
 
