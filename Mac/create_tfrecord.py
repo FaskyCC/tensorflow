@@ -6,13 +6,13 @@ from dataset_utils import _dataset_exists, _get_filenames_and_classes, write_lab
 flags = tf.app.flags
 
 #State your dataset directory
-flags.DEFINE_string('dataset_dir', '/Users/wangqingfa/Desktop/small1/', 'dataset dir')
+flags.DEFINE_string('dataset_dir', '/Users/wangqingfa/Desktop/small/', 'dataset dir')
 
 # The number of images in the validation set. You would have to know the total number of examples in advance. This is essentially your evaluation dataset.
 flags.DEFINE_float('validation_size', 0.3, 'Float: The proportion of examples in the dataset to be used for validation')
 
 # The number of shards to split the dataset into
-flags.DEFINE_integer('num_shards', 2, 'Int: Number of shards to split the TFRecord files')
+flags.DEFINE_integer('num_shards', 1, 'Int: Number of shards to split the TFRecord files')
 
 # Seed for repeatability.
 flags.DEFINE_integer('random_seed', 0, 'Int: Random seed to use for repeatability.')
