@@ -9,10 +9,10 @@ slim = tf.contrib.slim
 
 #================ DATASET INFORMATION ======================
 #State dataset directory where the tfrecord files are located
-dataset_dir = r'C:/Users/Fa/Desktop/Test1/'
+dataset_dir = r'C:/Users/Fa/Desktop/Test/'
 
 #State where your log file is at. If it doesn't exist, create it.
-log_dir = r'C:/Users/Fa/Desktop/Test1/'
+log_dir = r'C:/Users/Fa/Desktop/Test/'
 
 #State where your checkpoint file is
 checkpoint_file = 'C:/Users/Fa/Desktop/kaggle/inception_resnet_v2_2016_08_30.ckpt'
@@ -24,7 +24,7 @@ image_size = 299
 num_classes = 5
 
 #State the labels file and read it
-labels_file = 'C:/Users/Fa/Desktop/Test1/labels.txt'
+labels_file = 'C:/Users/Fa/Desktop/Test/labels.txt'
 labels = open(labels_file, 'r')
 
 #Create a dictionary to refer each label to their string name
@@ -46,10 +46,10 @@ items_to_descriptions = {
 
 #================= TRAINING INFORMATION ==================
 #State the number of epochs to train
-num_epochs = 15
+num_epochs = 70
 
 #State your batch size
-batch_size = 8
+batch_size = 10
 
 #Learning rate information and configuration (Up to you to experiment)
 initial_learning_rate = 0.0002

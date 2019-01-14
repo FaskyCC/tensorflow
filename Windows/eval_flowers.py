@@ -11,19 +11,19 @@ plt.style.use('ggplot')
 slim = tf.contrib.slim
 
 #State your log directory where you can retrieve your model
-log_dir = r'C:/Users/Fa/Desktop/Test1/'
+log_dir = r'C:/Users/Fa/Desktop/Test/'
 
 #Create a new evaluation log directory to visualize the validation process
-log_eval = 'C:/Users/Fa/Desktop/Test1/log_eval_test'
+log_eval = 'C:/Users/Fa/Desktop/Test/log_eval_test'
 
 #State the dataset directory where the validation set is found
-dataset_dir = r'C:/Users/Fa/Desktop/Test1/'
+dataset_dir = r'C:/Users/Fa/Desktop/Test/'
 
 #State the batch_size to evaluate each time, which can be a lot more than the training batch
-batch_size = 16
+batch_size = 8
 
 #State the number of epochs to evaluate
-num_epochs = 2
+num_epochs = 1
 
 #Get the latest checkpoint file
 checkpoint_file = tf.train.latest_checkpoint(log_dir)
@@ -56,6 +56,12 @@ def run():
 
         #Just define the metrics to track without the loss or whatsoever
         predictions = tf.argmax(end_points['Predictions'], 1)
+        sv = tf.train.Supervisor(logdir=log_eval, summary_op=None, saver=None, init_fn=restore_fn)
+        with sv.managed_session() as sess:
+            # sess.run(tf.global_variables_initializer())
+            for i in range(8):
+                predict_class = sess.run(predictions)
+                print(predict_class)
         accuracy, accuracy_update = tf.contrib.metrics.streaming_accuracy(predictions, labels)
         metrics_op = tf.group(accuracy_update)
 
@@ -111,10 +117,11 @@ def run():
             #Now we want to visualize the last batch's images just to see what our model has predicted
 
             raw_images, labels, predictions = sess.run([raw_images, labels, predictions])
-            for i in range(16):
+            for i in range(32):
                 image, label, prediction = raw_images[i], labels[i], predictions[i]
                 prediction_name, label_name = dataset.labels_to_name[prediction], dataset.labels_to_name[label]
                 text = 'Prediction: %s \n Ground Truth: %s' %(prediction_name, label_name)
+                print(prediction_name)
                 img_plot = plt.imshow(image)
 
                 #Set up the plot and hide axes

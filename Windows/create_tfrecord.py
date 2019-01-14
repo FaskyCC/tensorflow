@@ -6,10 +6,10 @@ from dataset_utils import _dataset_exists, _get_filenames_and_classes, write_lab
 flags = tf.app.flags
 
 #State your dataset directory
-flags.DEFINE_string('dataset_dir', 'C:/Users/Fa/Desktop/Test1/', 'dataset dir')
+flags.DEFINE_string('dataset_dir', 'C:/Users/Fa/Desktop/Test3/', 'dataset dir')
 
 # The number of images in the validation set. You would have to know the total number of examples in advance. This is essentially your evaluation dataset.
-flags.DEFINE_float('validation_size', 0.2, 'Float: The proportion of examples in the dataset to be used for validation')
+flags.DEFINE_float('validation_size', 1, 'Float: The proportion of examples in the dataset to be used for validation')
 
 # The number of shards to split the dataset into
 flags.DEFINE_integer('num_shards', 1, 'Int: Number of shards to split the TFRecord files')
@@ -49,8 +49,8 @@ def main():
     num_validation = int(FLAGS.validation_size * len(photo_filenames))
 
     # Divide the training datasets into train and test:
-    random.seed(FLAGS.random_seed)
-    random.shuffle(photo_filenames)
+    # random.seed(FLAGS.random_seed)
+    # random.shuffle(photo_filenames)
     training_filenames = photo_filenames[num_validation:]
     validation_filenames = photo_filenames[:num_validation]
 
