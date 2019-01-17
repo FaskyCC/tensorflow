@@ -52,7 +52,7 @@ num_epochs = 1
 batch_size = 8
 
 #Learning rate information and configuration (Up to you to experiment)
-initial_learning_rate = 0.0002
+initial_learning_rate = 0.0001
 learning_rate_decay_factor = 0.7
 num_epochs_before_decay = 2
 
