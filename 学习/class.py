@@ -1,5 +1,6 @@
 import tensorflow as tf
 import tensorflow.examples.tutorials.mnist.input_data as input_data
+import numpy as np
 
 #Mnist
 mnist = input_data.read_data_sets('MNIST_data', one_hot = True)
@@ -35,8 +36,8 @@ def compute_accuracy(v_xs, v_ys):
     return result
 
 
-epoch =10
-batch_size =100
+epoch = 30
+batch_size = 100
 total_batch = int(mnist.train.num_examples/batch_size)
 
 
@@ -46,28 +47,33 @@ ys = tf.placeholder(tf.float32, [None, 10])
 
 #定义输出层
 '''
-两层 batch = 100  0.001
-两层 batch = 1 
+两层 batchsize = 100  0.001
+三层 batchsize = 100 
 
 '''
 
-l1 = add_layer(xs, 784, 500, activation_function=None)
-prediction = add_layer(l1, 500, 10, activation_function=None)
+l1 = add_layer(xs, 784, 300, activation_function=tf.nn.relu)
+l1 = tf.nn.dropout(l1, 0.75)
+
+prediction = add_layer(l1, 300, 10, activation_function=tf.nn.softmax)
 
 #定义loss
 
-cross_entropy = -tf.reduce_sum(ys*tf.log(tf.clip_by_value(prediction, 1e-10, 1.0)))
+cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys*tf.log(tf.clip_by_value(prediction, 1e-10, 1.0))))
+#防止因为损失函数会因为softmax出现0的情况，从而出现了0*log(0)，
+# 导致梯度下降法失效，所以采用tf.clip_by_value(V, min, max)（函数作用：截取V使之在min和max之间）
+
 tf.summary.scalar('loss', cross_entropy)
 
-train_step = tf.train.GradientDescentOptimizer(0.0001).minimize(cross_entropy)
+train_step = tf.train.GradientDescentOptimizer(0.001).minimize(cross_entropy)
 
 sess = tf.Session()
 merged = tf.summary.merge_all()
 writer = tf.summary.FileWriter("logs/", sess.graph)
 sess.run(tf.global_variables_initializer())
 
-for i in range(1000):
-    batch_xs, batch_ys = mnist.train.next_batch(100)
+for i in range(epoch*total_batch):
+    batch_xs, batch_ys = mnist.train.next_batch(batch_size)
     sess.run(train_step, feed_dict={
             xs: batch_xs, ys: batch_ys
         })
