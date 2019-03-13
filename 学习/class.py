@@ -53,7 +53,7 @@ ys = tf.placeholder(tf.float32, [None, 10])
 '''
 
 l1 = add_layer(xs, 784, 300, activation_function=tf.nn.relu)
-l1 = tf.nn.dropout(l1, 0.75)
+# l1 = tf.nn.dropout(l1, 0.75)
 
 prediction = add_layer(l1, 300, 10, activation_function=tf.nn.softmax)
 
