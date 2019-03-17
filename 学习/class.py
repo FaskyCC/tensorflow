@@ -17,7 +17,7 @@ def add_layer(inputs, in_size, out_size, activation_function = None):
     # y = wx+b
 
     Weights = tf.Variable(tf.random_normal([in_size, out_size]))
-    biases = tf.Variable(tf.zeros([1, out_size])+0.1)
+    biases = tf.Variable(tf.zeros([1, out_size])+0.01)
     Wx_plus_b = tf.matmul(inputs, Weights)+biases
 
     #对输出数据运用激活函数
@@ -36,8 +36,8 @@ def compute_accuracy(v_xs, v_ys):
     return result
 
 
-epoch = 30
-batch_size = 100
+epoch = 50
+batch_size = 1000
 total_batch = int(mnist.train.num_examples/batch_size)
 
 
@@ -53,7 +53,7 @@ ys = tf.placeholder(tf.float32, [None, 10])
 '''
 
 l1 = add_layer(xs, 784, 300, activation_function=tf.nn.relu)
-# l1 = tf.nn.dropout(l1, 0.75)
+l1 = tf.nn.dropout(l1, 0.75)
 
 prediction = add_layer(l1, 300, 10, activation_function=tf.nn.softmax)
 
@@ -65,7 +65,7 @@ cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys*tf.log(tf.clip_by_value(predict
 
 tf.summary.scalar('loss', cross_entropy)
 
-train_step = tf.train.GradientDescentOptimizer(0.001).minimize(cross_entropy)
+train_step = tf.train.AdagradOptimizer(0.3).minimize(cross_entropy)
 
 sess = tf.Session()
 merged = tf.summary.merge_all()
