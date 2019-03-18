@@ -213,7 +213,6 @@ def run():
             decay_steps = decay_steps,
             decay_rate = learning_rate_decay_factor,
             staircase = True)
-
         #Now we can define the optimizer that takes on the learning rate
         optimizer = tf.train.AdamOptimizer(learning_rate = lr)
 
